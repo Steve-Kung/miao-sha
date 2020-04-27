@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.thymeleaf.util.StringUtils;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+
 @Controller
 @RequestMapping("/login")
 public class LoginController {
@@ -30,27 +33,30 @@ public class LoginController {
 
     @RequestMapping("/do_login")
     @ResponseBody
-    public Result<Boolean> doLogin(LoginVO loginVO){
+    public Result<Boolean> doLogin(HttpServletResponse response, @Valid LoginVO loginVO){
         log.info(loginVO.toString());
         // 参数校验
-        String mobile = loginVO.getMobile();
-        String passInput = loginVO.getPassword();
-        if (StringUtils.isEmpty(passInput)){
-            return Result.error(CodeMsg.PASSWORD_EMPTY);
-        }
-        if (StringUtils.isEmpty(mobile)){
-            return Result.error(CodeMsg.MOBILE_EMPTY);
-        }
-        if (!ValidatorUtil.isMobile(mobile)){
-            return Result.error(CodeMsg.MOBILE_ERROR);
-        }
+//        String mobile = loginVO.getMobile();
+//        String passInput = loginVO.getPassword();
+//        if (StringUtils.isEmpty(passInput)){
+//            return Result.error(CodeMsg.PASSWORD_EMPTY);
+//        }
+//        if (StringUtils.isEmpty(mobile)){
+//            return Result.error(CodeMsg.MOBILE_EMPTY);
+//        }
+//        if (!ValidatorUtil.isMobile(mobile)){
+//            return Result.error(CodeMsg.MOBILE_ERROR);
+//        }
 
         // 登录
-        CodeMsg cm = miaoshaUserService.login(loginVO);
-        if (cm.getCode() == 0){
-            return Result.success(true);
-        } else {
-            return Result.error(cm);
-        }
+//        CodeMsg cm = miaoshaUserService.login(loginVO);
+//        if (cm.getCode() == 0){
+//            return Result.success(true);
+//        } else {
+//            return Result.error(cm);
+//        }
+
+        miaoshaUserService.login(response, loginVO);
+        return Result.success(true);
     }
 }
