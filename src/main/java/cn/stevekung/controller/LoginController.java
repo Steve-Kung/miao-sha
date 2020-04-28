@@ -9,10 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -33,7 +31,7 @@ public class LoginController {
 
     @RequestMapping("/do_login")
     @ResponseBody
-    public Result<Boolean> doLogin(HttpServletResponse response, @Valid LoginVO loginVO){
+    public Result<String> doLogin(HttpServletResponse response, @Valid LoginVO loginVO){
         log.info(loginVO.toString());
         // 参数校验
 //        String mobile = loginVO.getMobile();
@@ -56,7 +54,7 @@ public class LoginController {
 //            return Result.error(cm);
 //        }
 
-        miaoshaUserService.login(response, loginVO);
-        return Result.success(true);
+        String token = miaoshaUserService.login(response, loginVO);
+        return Result.success(token);
     }
 }

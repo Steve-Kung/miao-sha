@@ -1,5 +1,6 @@
 package cn.stevekung.controller;
 
+import cn.stevekung.domain.MiaoshaUser;
 import cn.stevekung.domain.User;
 import cn.stevekung.redis.RedisService;
 import cn.stevekung.redis.UserKey;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -59,5 +61,11 @@ public class HelloController {
         User user = new User(2, "龚健2");
         redisService.set(UserKey.getById,""+2, user);
         return Result.success(true);
+    }
+
+    @RequestMapping("/info")
+    @ResponseBody
+    public Result<MiaoshaUser> info(Model model, MiaoshaUser user){
+        return Result.success(user);
     }
 }

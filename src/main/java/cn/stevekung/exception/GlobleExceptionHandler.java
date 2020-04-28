@@ -2,13 +2,13 @@ package cn.stevekung.exception;
 
 import cn.stevekung.result.CodeMsg;
 import cn.stevekung.result.Result;
-import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.validation.BindException;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 

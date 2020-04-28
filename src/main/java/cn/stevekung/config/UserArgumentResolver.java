@@ -2,7 +2,6 @@ package cn.stevekung.config;
 
 import cn.stevekung.domain.MiaoshaUser;
 import cn.stevekung.service.MiaoshaUserService;
-import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
@@ -13,6 +12,7 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Service
@@ -44,6 +44,9 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
 
     private String getCookieValue(HttpServletRequest request, String cookiName) {
         Cookie[] cookies = request.getCookies();
+        if (cookies == null || cookies.length <= 0){
+            return null;
+        }
         for (Cookie cookie : cookies) {
             if(cookie.getName().equals(cookiName)){
                 return cookie.getValue();
