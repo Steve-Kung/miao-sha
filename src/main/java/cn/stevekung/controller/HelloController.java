@@ -2,6 +2,7 @@ package cn.stevekung.controller;
 
 import cn.stevekung.domain.MiaoshaUser;
 import cn.stevekung.domain.User;
+import cn.stevekung.rabbitmq.MQSender;
 import cn.stevekung.redis.RedisService;
 import cn.stevekung.redis.UserKey;
 import cn.stevekung.result.CodeMsg;
@@ -68,4 +69,36 @@ public class HelloController {
     public Result<MiaoshaUser> info(Model model, MiaoshaUser user){
         return Result.success(user);
     }
+
+    @Autowired
+    MQSender sender;
+
+//    @RequestMapping("/mq")
+//    @ResponseBody
+//    public Result<String> mq() {
+//		sender.send("hello,mq");
+//        return Result.success("Hello，world");
+//    }
+//
+//    @RequestMapping("/mq/topic")
+//    @ResponseBody
+//    public Result<String> topic() {
+//		sender.sendTopic("hello,mq topic");
+//        return Result.success("Hello，world");
+//    }
+//
+//    @RequestMapping("/mq/fanout")
+//    @ResponseBody
+//    public Result<String> fanout() {
+//		sender.sendFanout("hello, fanout");
+//        return Result.success("Hello，world");
+//    }
+//
+//    @RequestMapping("/mq/header")
+//    @ResponseBody
+//    public Result<String> header() {
+//		sender.sendHeader("hello, header");
+//        return Result.success("Hello，world");
+//    }
+
 }
